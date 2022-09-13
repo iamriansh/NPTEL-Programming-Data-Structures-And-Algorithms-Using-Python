@@ -1,1 +1,50 @@
+def frequency(list):
+  x = {}
+  minlist = []
+  maxlist = []
+  
+  for i in list:
+    x[i] = x.get(i,0) + 1
+    
+  min_val = min(x.values())
+  for key in x.keys():
+    if x[key] == min_val:
+      minlist.append(key)
+        
+  max_val = max(x.values())
+  for key in x.keys():
+    if x[key] == max_val:
+      maxlist.append(key)
 
+  minlist.sort(reverse=False)
+  maxlist.sort(reverse=False)
+  return (minlist,maxlist)
+  
+def onehop(l):
+  n=len(l)
+  oh=[]
+  for i in range(0,n):
+    for j in range(0,n):
+      if ((l[i][1]==l[j][0]) and (l[i][0]!=l[j][1])):
+        oh+= [(l[i][0], l[j][1])]
+  myset=set(oh)
+  return(sorted(myset))
+import ast
+
+def parse(inp):
+  inp = ast.literal_eval(inp)
+  return (inp)
+
+fncall = input()
+lparen = fncall.find("(")
+rparen = fncall.rfind(")")
+fname = fncall[:lparen]
+farg = fncall[lparen+1:rparen]
+
+if fname == "frequency":
+  arg = parse(farg)
+  print(frequency(arg))
+
+if fname == "onehop":
+  arg = parse(farg)
+  print(onehop(arg))
